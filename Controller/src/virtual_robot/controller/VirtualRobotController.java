@@ -250,16 +250,19 @@ public class VirtualRobotController {
         if (opModeInitialized || opModeStarted) return;
         if (bot != null) bot.removeFromDisplay(fieldPane);
         if (cbxConfig.getValue().equals("Mechanum Bot")){
-            bot = new MechanumBot(this);
+            bot = new MechanumBot(this, 0);
         } else if (cbxConfig.getValue().equals("Two Wheel Bot")){
-            bot = new TwoWheelBot(this);
+            bot = new TwoWheelBot(this, 0);
         } else {
-            bot = new XDriveBot(this);
+            bot = new XDriveBot(this, 0);
         }
         hardwareMap = bot.getHardwareMap();
-        enemyBot1 = new MechanumBot(this);
-        enemyBot2 = new TwoWheelBot(this);
-        enemyBot3 = new XDriveBot(this);
+        enemyBot1 = new MechanumBot(this, 1);
+        enemyBot1.updateDisplay();
+        enemyBot2 = new MechanumBot(this, 2);
+        enemyBot2.updateDisplay();
+        enemyBot3 = new MechanumBot(this, 3);
+        enemyBot3.updateDisplay();
         initializeTelemetryTextArea();
         sldRandomMotorError.setValue(0.0);
         sldSystematicMotorError.setValue(0.0);

@@ -25,8 +25,8 @@ public class TwoWheelBot extends VirtualBot {
 
 
 
-    public TwoWheelBot(VirtualRobotController controller){
-        super(controller, "two_wheel_bot.fxml");
+    public TwoWheelBot(VirtualRobotController controller, int robotIndex){
+        super(controller, "two_wheel_bot.fxml", robotIndex);
         leftMotor = (DcMotorImpl)hardwareMap.dcMotor.get("left_motor");
         rightMotor = (DcMotorImpl)hardwareMap.dcMotor.get("right_motor");
         distanceSensors = new VirtualRobotController.DistanceSensorImpl[]{

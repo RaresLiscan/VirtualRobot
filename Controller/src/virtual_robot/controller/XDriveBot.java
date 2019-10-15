@@ -30,8 +30,8 @@ public class XDriveBot extends VirtualBot {
     private double[][] tWR; //Transform from wheel motion to robot motion
 
 
-    public XDriveBot(VirtualRobotController controller) {
-        super(controller, "xdrive_bot.fxml");
+    public XDriveBot(VirtualRobotController controller, int robotIndex) {
+        super(controller, "xdrive_bot.fxml", robotIndex);
         motors = new DcMotorImpl[]{
                 (DcMotorImpl)hardwareMap.dcMotor.get("back_left_motor"),
                 (DcMotorImpl)hardwareMap.dcMotor.get("front_left_motor"),

@@ -32,8 +32,8 @@ public class MechanumBot extends VirtualBot {
     private double[][] tWR; //Transform from wheel motion to robot motion
 
 
-    public MechanumBot(VirtualRobotController controller) {
-        super(controller, "mechanum_bot.fxml");
+    public MechanumBot(VirtualRobotController controller, int robotIndex) {
+        super(controller, "mechanum_bot.fxml", robotIndex);
         motors = new DcMotorImpl[]{
                 (DcMotorImpl)hardwareMap.dcMotor.get("back_left_motor"),
                 (DcMotorImpl)hardwareMap.dcMotor.get("front_left_motor"),

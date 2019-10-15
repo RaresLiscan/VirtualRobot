@@ -30,7 +30,7 @@ public abstract class VirtualBot {
     protected double y = 0;
     protected double headingRadians = 0;
 
-    public VirtualBot(VirtualRobotController controller, String fxmlResourceName){
+    public VirtualBot(VirtualRobotController controller, String fxmlResourceName, int robotIndex){
         this.controller = controller;
         fieldPane = controller.getFieldPane();
         createHardwareMap();
@@ -38,19 +38,39 @@ public abstract class VirtualBot {
         halfFieldWidth = fieldWidth / 2.0;
         botWidth = fieldWidth / 8.0;
         halfBotWidth = botWidth / 2.0;
-        setUpDisplayGroup(fxmlResourceName);
+        setUpDisplayGroup(fxmlResourceName, robotIndex);
+        if (robotIndex == 0) {
+            x = botWidth;
+            y = -(halfFieldWidth - 3 * halfBotWidth);
+        }
+        if (robotIndex == 1) {
+            x = -botWidth;
+            y = -(halfFieldWidth - 3 * halfBotWidth);
+        }
+        if (robotIndex == 2) {
+            x = -botWidth;
+            y = halfFieldWidth - 2 * halfBotWidth;
+            headingRadians = Math.PI;
+        }
+        if (robotIndex == 3) {
+            x = botWidth;
+            y = halfFieldWidth - 2 * halfBotWidth;
+            headingRadians = Math.PI;
+        }
     }
 
-    protected void setUpDisplayGroup(String fxmlResourceName){
+    protected void setUpDisplayGroup(String fxmlResourceName, int robotIndex){
         try {
             displayGroup = (Group) FXMLLoader.load(getClass().getResource(fxmlResourceName));
         } catch(java.io.IOException Exc){
             System.out.println("Could not load display group for two wheel bot.");
         }
 
-        displayGroup.getTransforms().add(new Translate(fieldWidth/2.0 - halfBotWidth, fieldWidth/2.0 - halfBotWidth));
+
+        displayGroup.getTransforms().add(new Translate(fieldWidth/2.0 + x - halfBotWidth, fieldWidth/2.0 - y - halfBotWidth));
         displayGroup.getTransforms().add(new Rotate(0, halfBotWidth, halfBotWidth));
         displayGroup.getTransforms().add(new Scale(botWidth/75.0, botWidth/75.0, 0, 0));
+
 
         fieldPane.getChildren().add(displayGroup);
     }
