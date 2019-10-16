@@ -118,7 +118,7 @@ public class VirtualRobotController {
     public void initialize() {
         OpMode.setVirtualRobotController(this);
         setupCbxOpModes();
-        cbxConfig.setItems(FXCollections.observableArrayList( "Mechanum Bot", "XDrive Bot", "Two Wheel Bot"));
+        cbxConfig.setItems(FXCollections.observableArrayList( "CyberPunk", "Mechanum Bot", "XDrive Bot", "Two Wheel Bot"));
         cbxConfig.setValue(cbxConfig.getItems().get(0));
         //fieldWidth = fieldPane.getPrefWidth();
         fieldWidth = Config.FIELD_WIDTH;
@@ -249,20 +249,25 @@ public class VirtualRobotController {
     public void setConfig(ActionEvent event){
         if (opModeInitialized || opModeStarted) return;
         if (bot != null) bot.removeFromDisplay(fieldPane);
-        if (cbxConfig.getValue().equals("Mechanum Bot")){
+        if (cbxConfig.getValue().equals("CyberPunk")) {
+            bot = new CyberPunk(this, "cyberpunk.fxml", 0);
+        }
+        else if (cbxConfig.getValue().equals("Mechanum Bot")){
             bot = new MechanumBot(this, 0);
         } else if (cbxConfig.getValue().equals("Two Wheel Bot")){
             bot = new TwoWheelBot(this, 0);
         } else {
             bot = new XDriveBot(this, 0);
         }
+        bot.updateDisplay();
         hardwareMap = bot.getHardwareMap();
-        enemyBot1 = new MechanumBot(this, 1);
-        enemyBot1.updateDisplay();
-        enemyBot2 = new MechanumBot(this, 2);
-        enemyBot2.updateDisplay();
-        enemyBot3 = new MechanumBot(this, 3);
-        enemyBot3.updateDisplay();
+//        enemyBot1 = new MechanumBot(this, 1);
+//        enemyBot1.updateDisplay();
+//        hwMP1 = enemyBot1.getHardwareMap();
+//        enemyBot2 = new MechanumBot(this, 2);
+//        enemyBot2.updateDisplay();
+//        enemyBot3 = new MechanumBot(this, 3);
+//        enemyBot3.updateDisplay();
         initializeTelemetryTextArea();
         sldRandomMotorError.setValue(0.0);
         sldSystematicMotorError.setValue(0.0);
@@ -291,6 +296,7 @@ public class VirtualRobotController {
                 @Override
                 public void run() {
                     bot.updateDisplay();
+//                    enemyBot1.updateDisplay();
                     updateTelemetryDisplay();
                 }
             };
@@ -322,6 +328,9 @@ public class VirtualRobotController {
             }
             if (opModeThread.isAlive()) System.out.println("OpMode Thread Failed to Terminate.");
             bot.powerDownAndReset();
+//            enemyBot1.powerDownAndReset();
+//            enemyBot2.powerDownAndReset();
+//            enemyBot3.powerDownAndReset();
             if (Config.USE_VIRTUAL_GAMEPAD) virtualGamePadController.resetGamePad();
             initializeTelemetryTextArea();
             cbxConfig.setDisable(false);
@@ -553,12 +562,14 @@ public class VirtualRobotController {
      */
     public class OpModeBase {
         protected final HardwareMap hardwareMap;
+//        protected final HardwareMap hwMP1;
         protected final GamePad gamepad1;
         protected final GamePad gamepad2;
         protected final Telemetry telemetry;
 
         public OpModeBase() {
             hardwareMap = VirtualRobotController.this.hardwareMap;
+//            hwMP1 = VirtualRobotController.this.hwMP1;
             gamepad1 = gamePad1;
             this.gamepad2 = gamePad2;
             telemetry = new TelemetryImpl();
