@@ -3,6 +3,7 @@ package virtual_robot.controller;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 import com.qualcomm.robotcore.hardware.*;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 
 import javax.naming.directory.SearchResult;
@@ -10,17 +11,14 @@ import javax.naming.directory.SearchResult;
 public class CyberPunk extends VirtualBot {
 
     private MotorType motorType;
-
-//    private DcMotorImpl stangaFata = null;
-//    private DcMotorImpl stangaSpate = null;
-//    private DcMotorImpl dreaptaFata = null;
-//    private DcMotorImpl dreaptaSpate = null;
     private DcMotorImpl[] motors = null;
     private DcMotorImpl ridicareBrat = null;
     private DcMotorImpl scripeteSlide = null;
     private ServoImpl gheara = null;
     private BNO055IMUImpl imu = null;
 
+    private Rectangle cube = null;
+    private Rectangle brat = null;
     private double wheelCircumference;
     private double interWheelWidth;
     private double interWheelLength;
@@ -54,6 +52,9 @@ public class CyberPunk extends VirtualBot {
                 {-0.25/ wlAverage, -0.25/ wlAverage, 0.25/ wlAverage, 0.25/ wlAverage},
                 {-0.25, 0.25, 0.25, -0.25}
         };
+
+        cube = (Rectangle) displayGroup.getChildren().get(6);
+        brat = (Rectangle) displayGroup.getChildren().get(5);
     }
 
     @Override
@@ -102,7 +103,6 @@ public class CyberPunk extends VirtualBot {
         for (int i=0; i<4; i++) motors[i].stopAndReset();
         ridicareBrat.stopAndReset();
         scripeteSlide.stopAndReset();
-        //gyro.deinit();
         imu.close();
     }
 
@@ -123,14 +123,19 @@ public class CyberPunk extends VirtualBot {
 
     public synchronized void updateDisplay(){
         super.updateDisplay();
-//        ((Rotate)backServoArm.getTransforms().get(0)).setAngle(-180.0 * servo.getPosition());
-//        if (gheara.getPosition() == 1) {
-//            cube.setWidth(37.5);
-//            cube.setHeight(20);
-//        }
-//        else {
-//            cube.setHeight(0);
-//            cube.setWidth(0);
-//        }
+        if (ridicareBrat.getPower() > 0 && brat.getHeight() > 10) {
+            brat.setHeight(brat.getHeight() - 1);
+        }
+        if (ridicareBrat.getPower() < 0 && brat.getHeight() < 60) {
+            brat.setHeight(brat.getHeight() + 1);
+        }
+        if (gheara.getPosition() == 1) {
+            cube.setWidth(37.5);
+            cube.setHeight(20);
+        }
+        else {
+            cube.setHeight(0);
+            cube.setWidth(0);
+        }
     }
 }
