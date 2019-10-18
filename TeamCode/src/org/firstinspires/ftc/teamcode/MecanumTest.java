@@ -43,7 +43,7 @@ public class MecanumTest extends LinearOpMode {
         while (opModeIsActive()) {
             double rotate = -gamepad1.right_stick_x;
             double powerX = -gamepad1.left_stick_x;
-            double powerY = gamepad1.right_trigger != 0 ? -gamepad1.right_trigger : gamepad1.left_trigger;
+            double powerY = gamepad1.left_stick_y;
 
             if (Math.abs(powerY) >= Math.abs(powerX)) {
                 stangaSpate.setPower(powerY + rotate);

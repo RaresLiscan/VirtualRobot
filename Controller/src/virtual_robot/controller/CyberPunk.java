@@ -3,6 +3,8 @@ package virtual_robot.controller;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 import com.qualcomm.robotcore.hardware.*;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 
@@ -23,6 +25,7 @@ public class CyberPunk extends VirtualBot {
     private double interWheelWidth;
     private double interWheelLength;
     private double wlAverage;
+    public double height = 45;
 
     private double[][] tWR; //Transform from wheel motion to robot motion
 
@@ -137,5 +140,7 @@ public class CyberPunk extends VirtualBot {
             cube.setHeight(0);
             cube.setWidth(0);
         }
+
+
     }
 }

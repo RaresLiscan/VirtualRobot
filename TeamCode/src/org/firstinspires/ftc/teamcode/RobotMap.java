@@ -24,4 +24,11 @@ public class RobotMap {
         gheara = hardwareMap.get(Servo.class, "gheara");
     }
 
+    public void stopDriving() {
+        stangaFata.setPower(0);
+        stangaSpate.setPower(0);
+        dreaptaFata.setPower(0);
+        dreaptaSpate.setPower(0);
+    }
+
 }
