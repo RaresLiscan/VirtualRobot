@@ -19,9 +19,9 @@ public class RobotMap {
         dreaptaFata = hardwareMap.get(DcMotor.class, "dreaptaFata");
         stangaSpate = hardwareMap.get(DcMotor.class, "stangaSpate");
         dreaptaSpate = hardwareMap.get(DcMotor.class, "dreaptaSpate");
-        ridicareBrat = hardwareMap.get(DcMotor.class, "ridicareBrat");
-        scripeteSlide = hardwareMap.get(DcMotor.class, "scripeteSlide");
-        gheara = hardwareMap.get(Servo.class, "gheara");
+//        ridicareBrat = hardwareMap.get(DcMotor.class, "ridicareBrat");
+//        scripeteSlide = hardwareMap.get(DcMotor.class, "scripeteSlide");
+//        gheara = hardwareMap.get(Servo.class, "gheara");
     }
 
     public void stopDriving() {

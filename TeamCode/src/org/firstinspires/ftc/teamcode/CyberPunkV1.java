@@ -21,17 +21,21 @@ public class CyberPunkV1 extends LinearOpMode {
 
 
 
+            robot.stangaFata.setPower(gamepad1.left_stick_y);
+            robot.stangaSpate.setPower(gamepad1.left_stick_y);
+            robot.dreaptaFata.setPower(-gamepad1.left_stick_y);
+            robot.dreaptaSpate.setPower(-gamepad1.left_stick_y);
 
 
-            if (robot.scripeteSlide.getPower() > 0 && height < 100) {
-                height += robot.scripeteSlide.getPower();
-            }
-            if (robot.scripeteSlide.getPower() < 0 && height > 45) {
-                height += robot.scripeteSlide.getPower();
-            }
+//            if (robot.scripeteSlide.getPower() > 0 && height < 100) {
+//                height += robot.scripeteSlide.getPower();
+//            }
+//            if (robot.scripeteSlide.getPower() < 0 && height > 45) {
+//                height += robot.scripeteSlide.getPower();
+//            }
 
-            telemetry.addData("Inaltimea bratului: ", height);
-            telemetry.update();
+//            telemetry.addData("Inaltimea bratului: ", height);
+//            telemetry.update();
         }
     }
 }

@@ -1,26 +1,19 @@
 package virtual_robot.controller;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 import com.qualcomm.robotcore.hardware.*;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
-
-import javax.naming.directory.SearchResult;
 
 public class CyberPunk extends VirtualBot {
 
     private MotorType motorType;
     private DcMotorImpl[] motors = null;
-    private DcMotorImpl ridicareBrat = null;
-    private DcMotorImpl scripeteSlide = null;
-    private ServoImpl gheara = null;
+//    private DcMotorImpl ridicareBrat = null;
+//    private DcMotorImpl scripeteSlide = null;
+//    private ServoImpl gheara = null;
     private BNO055IMUImpl imu = null;
 
-    private Rectangle cube = null;
-    private Rectangle brat = null;
+//    private Rectangle cube = null;
+//    private Rectangle brat = null;
     private double wheelCircumference;
     private double interWheelWidth;
     private double interWheelLength;
@@ -39,9 +32,9 @@ public class CyberPunk extends VirtualBot {
                 (DcMotorImpl) hardwareMap.get(DcMotor.class, "dreaptaFata"),
                 (DcMotorImpl) hardwareMap.get(DcMotor.class, "dreaptaSpate")
         };
-        ridicareBrat = (DcMotorImpl) hardwareMap.get(DcMotor.class, "ridicareBrat");
-        scripeteSlide = (DcMotorImpl) hardwareMap.get(DcMotor.class, "scripeteSlide");
-        gheara = (ServoImpl) hardwareMap.get(Servo.class, "gheara");
+//        ridicareBrat = (DcMotorImpl) hardwareMap.get(DcMotor.class, "ridicareBrat");
+//        scripeteSlide = (DcMotorImpl) hardwareMap.get(DcMotor.class, "scripeteSlide");
+//        gheara = (ServoImpl) hardwareMap.get(Servo.class, "gheara");
         imu = hardwareMap.get(BNO055IMUImpl.class, "imu");
 
         wheelCircumference = Math.PI * botWidth / 4.5;
@@ -56,8 +49,8 @@ public class CyberPunk extends VirtualBot {
                 {-0.25, 0.25, 0.25, -0.25}
         };
 
-        cube = (Rectangle) displayGroup.getChildren().get(6);
-        brat = (Rectangle) displayGroup.getChildren().get(5);
+//        cube = (Rectangle) displayGroup.getChildren().get(6);
+//        brat = (Rectangle) displayGroup.getChildren().get(5);
     }
 
     @Override
@@ -104,8 +97,8 @@ public class CyberPunk extends VirtualBot {
     @Override
     public void powerDownAndReset() {
         for (int i=0; i<4; i++) motors[i].stopAndReset();
-        ridicareBrat.stopAndReset();
-        scripeteSlide.stopAndReset();
+//        ridicareBrat.stopAndReset();
+//        scripeteSlide.stopAndReset();
         imu.close();
     }
 
@@ -118,28 +111,28 @@ public class CyberPunk extends VirtualBot {
         hardwareMap.put("dreaptaFata", new DcMotorImpl(motorType));
         hardwareMap.put("stangaSpate", new DcMotorImpl(motorType));
         hardwareMap.put("dreaptaSpate", new DcMotorImpl(motorType));
-        hardwareMap.put("ridicareBrat", new DcMotorImpl(motorType));
-        hardwareMap.put("scripeteSlide", new DcMotorImpl(motorType));
-        hardwareMap.put("gheara", new ServoImpl());
+//        hardwareMap.put("ridicareBrat", new DcMotorImpl(motorType));
+//        hardwareMap.put("scripeteSlide", new DcMotorImpl(motorType));
+//        hardwareMap.put("gheara", new ServoImpl());
         hardwareMap.put("imu", new BNO055IMUImpl(this, 175));
     }
 
     public synchronized void updateDisplay(){
         super.updateDisplay();
-        if (ridicareBrat.getPower() > 0 && brat.getHeight() > 10) {
-            brat.setHeight(brat.getHeight() - 1);
-        }
-        if (ridicareBrat.getPower() < 0 && brat.getHeight() < 60) {
-            brat.setHeight(brat.getHeight() + 1);
-        }
-        if (gheara.getPosition() == 1) {
-            cube.setWidth(37.5);
-            cube.setHeight(20);
-        }
-        else {
-            cube.setHeight(0);
-            cube.setWidth(0);
-        }
+//        if (ridicareBrat.getPower() > 0 && brat.getHeight() > 10) {
+//            brat.setHeight(brat.getHeight() - 1);
+//        }
+//        if (ridicareBrat.getPower() < 0 && brat.getHeight() < 60) {
+//            brat.setHeight(brat.getHeight() + 1);
+//        }
+//        if (gheara.getPosition() == 1) {
+//            cube.setWidth(37.5);
+//            cube.setHeight(20);
+//        }
+//        else {
+//            cube.setHeight(0);
+//            cube.setWidth(0);
+//        }
 
 
     }
